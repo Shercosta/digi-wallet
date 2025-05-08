@@ -27,14 +27,14 @@ func main() {
 		r.Use(middleware.AuthMiddleware)
 
 		r.Get("/secure-route", func(w http.ResponseWriter, r *http.Request) {
-			userID := r.Context().Value(middleware.UserIDKey).(uint)
+			userID := middleware.GetUserID(r.Context())
 			construct := map[string]any{
 				"user_id": userID,
 			}
-			response.JSONSuccess(w, "hello from secure route", construct, nil)
+			response.JSONSuccess(w, construct, nil, nil)
 		})
 	})
 
-	fmt.Printf("Server running on port 3000")
+	fmt.Println("Server running on port 3000")
 	http.ListenAndServe(":3000", r)
 }
