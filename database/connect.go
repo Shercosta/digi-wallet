@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-func Connect() {
+func Connect() *gorm.DB {
 	dsn := "host=172.22.208.1 user=postgres password=postgres dbname=digi-wallet port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
@@ -32,4 +32,6 @@ func Connect() {
 	}
 
 	log.Println("database migrated")
+
+	return db
 }
