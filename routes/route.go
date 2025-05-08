@@ -1,8 +1,10 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 
+	"github.com/Shercosta/digi-wallet/middleware"
 	"github.com/Shercosta/digi-wallet/models"
 	"github.com/Shercosta/digi-wallet/request"
 	"github.com/Shercosta/digi-wallet/response"
@@ -17,7 +19,11 @@ func GetBalance(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var balance models.Balance
 
-		err := db.First(&balance).Error
+		userID := middleware.GetUserID(r.Context())
+
+		fmt.Println("pass")
+
+		err := db.Where("user_id = ?", userID).First(&balance).Error
 		if err != nil {
 			response.JSONError(w, http.StatusInternalServerError, err.Error(), nil)
 			return
@@ -64,7 +70,9 @@ func PostTakeBalance(db *gorm.DB) http.HandlerFunc {
 		var req request.TakeRequest
 		req.AssignFormValues(r)
 
-		err := db.First(&balance).Error
+		userID := middleware.GetUserID(r.Context())
+
+		err := db.Where("user_id = ?", userID).First(&balance).Error
 		if err != nil {
 			response.JSONError(w, http.StatusInternalServerError, err.Error(), nil)
 			return

@@ -8,6 +8,7 @@ import (
 	"github.com/Shercosta/digi-wallet/handlers"
 	"github.com/Shercosta/digi-wallet/middleware"
 	"github.com/Shercosta/digi-wallet/response"
+	"github.com/Shercosta/digi-wallet/routes"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -33,6 +34,9 @@ func main() {
 			}
 			response.JSONSuccess(w, construct, nil, nil)
 		})
+
+		r.Post("/take-balance", routes.PostTakeBalance(db))
+		r.Get("/balance", routes.GetBalance(db))
 	})
 
 	fmt.Println("Server running on port 3000")
