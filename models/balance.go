@@ -4,3 +4,7 @@ type Balance struct {
 	GormModel
 	Amount float64 `json:"amount"`
 }
+
+func (Balance) TableName() string {
+	return "balances"
+}

@@ -25,6 +25,7 @@ func Connect() *gorm.DB {
 
 	m := gormigrate.New(db, gormigrate.DefaultOptions, []*gormigrate.Migration{
 		migrations.CreateBalanceTable(),
+		migrations.CreateUserTable(),
 	})
 
 	if err := m.Migrate(); err != nil {
