@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "8959c367-c9d0-4d5b-b150-a61fc0adf230",
+		"name": "digi-wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44298202",
+		"_collection_link": "https://shercosta.postman.co/workspace/My-Workspace~4fbf85f7-8ced-4605-8575-c139d65acd9b/collection/44298202-8959c367-c9d0-4d5b-b150-a61fc0adf230?action=share&source=collection_link&creator=44298202"
+	},
+	"item": [
+		{
+			"name": "Get balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get init balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/init-balance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"init-balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post take balance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "amount",
+							"value": "4000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/take-balance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"take-balance"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
