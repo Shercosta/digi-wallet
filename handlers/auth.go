@@ -90,6 +90,17 @@ func Register(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
+		// create balance for user
+		balance := models.Balance{
+			Amount: 100000,
+			UserID: user.ID,
+		}
+
+		if err := db.Create(&balance).Error; err != nil {
+			response.JSONError(w, http.StatusInternalServerError, err.Error(), nil)
+			return
+		}
+
 		response.JSONSuccess(w, user, nil, nil)
 	}
 }
