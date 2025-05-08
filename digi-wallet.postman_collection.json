@@ -10,32 +10,25 @@
 		{
 			"name": "Get balance",
 			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						""
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_digi_wallet_token}}",
+							"type": "string"
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get init balance",
-			"request": {
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/init-balance",
+					"raw": "{{base_url}}/balance",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"init-balance"
+						"balance"
 					]
 				}
 			},
@@ -44,6 +37,16 @@
 		{
 			"name": "Post take balance",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_digi_wallet_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -51,7 +54,7 @@
 					"formdata": [
 						{
 							"key": "amount",
-							"value": "4000",
+							"value": "2000",
 							"type": "text"
 						}
 					]
@@ -63,6 +66,85 @@
 					],
 					"path": [
 						"take-balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Spencer\",\r\n    \"password\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Spencer\",\r\n    \"password\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get secure-route",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_digi_wallet_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/secure-route",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"secure-route"
 					]
 				}
 			},
@@ -95,6 +177,11 @@
 		{
 			"key": "base_url",
 			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "auth_digi_wallet_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDY5NDU2MzMsInVzZXJfaWQiOjJ9.H636rtN_uLFfwz6Zio2Oqp9XoHiuGWuc7PsWkCIAl8o",
 			"type": "string"
 		}
 	]
