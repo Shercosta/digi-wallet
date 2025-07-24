@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
@@ -11,7 +12,17 @@ import (
 	"github.com/Shercosta/digi-wallet/response"
 	"github.com/Shercosta/digi-wallet/routes"
 	"github.com/go-chi/chi/v5"
+	"github.com/joho/godotenv"
 )
+
+func init() {
+	// Load .env file
+	// It's good practice to handle the error, e.g., if .env isn't found
+	if err := godotenv.Load(); err != nil {
+		log.Printf("No .env file found, or error loading: %v. Relying on system environment variables.", err)
+		// You can choose to log.Fatal here if .env is strictly required
+	}
+}
 
 func main() {
 	port := os.Getenv("PORT")
