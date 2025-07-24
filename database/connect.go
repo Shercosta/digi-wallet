@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/Shercosta/digi-wallet/database/migrations"
 	"github.com/go-gormigrate/gormigrate/v2"
@@ -12,7 +13,15 @@ import (
 )
 
 func Connect() *gorm.DB {
-	dsn := "host=172.22.208.1 user=postgres password=postgres dbname=digi-wallet port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbName := os.Getenv("DB_NAME")
+
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Jakarta",
+		dbHost, dbUser, dbPassword, dbName, dbPort)
+
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})

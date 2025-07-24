@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/Shercosta/digi-wallet/database"
 	"github.com/Shercosta/digi-wallet/handlers"
@@ -13,6 +14,7 @@ import (
 )
 
 func main() {
+	port := os.Getenv("PORT")
 	r := chi.NewRouter()
 
 	db := database.Connect()
@@ -39,6 +41,9 @@ func main() {
 		r.Get("/balance", routes.GetBalance(db))
 	})
 
-	fmt.Println("Server running on port 3000")
-	http.ListenAndServe(":3000", r)
+	// fmt.Println("Server running on port 3000")
+	// http.ListenAndServe(":3000", r)
+
+	fmt.Println("Server running on port", port)
+	http.ListenAndServe(":"+port, r)
 }

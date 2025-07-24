@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: digiuser
+      DB_PASSWORD: digipassword
+      DB_NAME: digidb
+      PORT: 8080
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy # <--- CHANGE THIS LINE
+    networks:
+      - digi-wallet-network
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_DB: digidb
+      POSTGRES_USER: digiuser
+      POSTGRES_PASSWORD: digipassword
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - digi-wallet-network
+    healthcheck: # <--- ADD THIS BLOCK
+      test: ["CMD-SHELL", "pg_isready -U digiuser -d digidb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s # Give the DB some time to fully initialize on first run
+
+volumes:
+  db_data:
+
+networks:
+  digi-wallet-network:
+    driver: bridge

@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "8959c367-c9d0-4d5b-b150-a61fc0adf230",
+		"_postman_id": "6281f8fd-5021-4570-9b2a-25a24fda24f9",
 		"name": "digi-wallet",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "44298202",
-		"_collection_link": "https://shercosta.postman.co/workspace/My-Workspace~4fbf85f7-8ced-4605-8575-c139d65acd9b/collection/44298202-8959c367-c9d0-4d5b-b150-a61fc0adf230?action=share&source=collection_link&creator=44298202"
+		"_collection_link": "https://shercosta.postman.co/workspace/dd5c2bfa-cfcb-4a66-86c0-6d3d3ea337f2/collection/44298202-6281f8fd-5021-4570-9b2a-25a24fda24f9?action=share&source=collection_link&creator=44298202"
 	},
 	"item": [
 		{
@@ -12,25 +12,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_digi_wallet_token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{auth_digi_wallet_token}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{base_url}}/balance",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"balance"
-					]
-				}
+				"url": "{{base_url}}/balance"
 			},
 			"response": []
 		},
@@ -39,13 +27,9 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_digi_wallet_token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{auth_digi_wallet_token}}"
+					}
 				},
 				"method": "POST",
 				"header": [],
@@ -59,15 +43,7 @@
 						}
 					]
 				},
-				"url": {
-					"raw": "{{base_url}}/take-balance",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"take-balance"
-					]
-				}
+				"url": "{{base_url}}/take-balance"
 			},
 			"response": []
 		},
@@ -85,20 +61,44 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{base_url}}/register",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"register"
-					]
-				}
+				"url": "{{base_url}}/register"
 			},
 			"response": []
 		},
 		{
 			"name": "Post login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the request was successful (e.g., status code 200 OK)\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Parse the JSON response body\r",
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"// Check if the 'token' property exists in the response\r",
+							"if (responseJson && responseJson.data && responseJson.data.token) {\r",
+							"    // Get the token value\r",
+							"    const accessToken = responseJson.data.token;\r",
+							"\r",
+							"    // Set the 'auth_token' collection variable\r",
+							"    // Make sure you have a collection variable named 'auth_token' created in your collection.\r",
+							"    pm.collectionVariables.set(\"auth_digi_wallet_token\", accessToken);\r",
+							"\r",
+							"    console.log(\"Access Token extracted and set to collection variable 'auth_token':\", accessToken);\r",
+							"} else {\r",
+							"    console.error(\"Access Token not found in the response or response is not valid JSON.\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -111,15 +111,7 @@
 						}
 					}
 				},
-				"url": {
-					"raw": "{{base_url}}/login",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"login"
-					]
-				}
+				"url": "{{base_url}}/login"
 			},
 			"response": []
 		},
@@ -128,25 +120,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{auth_digi_wallet_token}}",
-							"type": "string"
-						}
-					]
+					"bearer": {
+						"token": "{{auth_digi_wallet_token}}"
+					}
 				},
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "{{base_url}}/secure-route",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"secure-route"
-					]
-				}
+				"url": "{{base_url}}/secure-route"
 			},
 			"response": []
 		}
@@ -181,7 +161,7 @@
 		},
 		{
 			"key": "auth_digi_wallet_token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDY5NDU2MzMsInVzZXJfaWQiOjJ9.H636rtN_uLFfwz6Zio2Oqp9XoHiuGWuc7PsWkCIAl8o",
+			"value": "null",
 			"type": "string"
 		}
 	]
