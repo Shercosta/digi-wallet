@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "6281f8fd-5021-4570-9b2a-25a24fda24f9",
+		"_postman_id": "60eede65-f40d-4920-9be1-4a8a00e9f620",
 		"name": "digi-wallet",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "44298202",
-		"_collection_link": "https://shercosta.postman.co/workspace/dd5c2bfa-cfcb-4a66-86c0-6d3d3ea337f2/collection/44298202-6281f8fd-5021-4570-9b2a-25a24fda24f9?action=share&source=collection_link&creator=44298202"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26907078"
 	},
 	"item": [
 		{
@@ -12,13 +11,25 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{auth_digi_wallet_token}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_digi_wallet_token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "{{base_url}}/balance"
+				"url": {
+					"raw": "{{base_url}}/balance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"balance"
+					]
+				}
 			},
 			"response": []
 		},
@@ -27,9 +38,13 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{auth_digi_wallet_token}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_digi_wallet_token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
@@ -43,7 +58,15 @@
 						}
 					]
 				},
-				"url": "{{base_url}}/take-balance"
+				"url": {
+					"raw": "{{base_url}}/take-balance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"take-balance"
+					]
+				}
 			},
 			"response": []
 		},
@@ -61,7 +84,15 @@
 						}
 					}
 				},
-				"url": "{{base_url}}/register"
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
 			},
 			"response": []
 		},
@@ -111,7 +142,15 @@
 						}
 					}
 				},
-				"url": "{{base_url}}/login"
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
 			},
 			"response": []
 		},
@@ -120,13 +159,75 @@
 			"request": {
 				"auth": {
 					"type": "bearer",
-					"bearer": {
-						"token": "{{auth_digi_wallet_token}}"
-					}
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_digi_wallet_token}}",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "{{base_url}}/secure-route"
+				"url": {
+					"raw": "{{base_url}}/secure-route",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"secure-route"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List User Desc",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get List User Asc",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Add Balance",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/add-balance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"add-balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/add-balance",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"add-balance"
+					]
+				}
 			},
 			"response": []
 		}
