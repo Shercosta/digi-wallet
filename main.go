@@ -36,6 +36,7 @@ func main() {
 
 	r.Post("/login", handlers.Login(db))
 	r.Post("/register", handlers.Register(db))
+	r.Get("/list-user", routes.ListUsers(db))
 
 	r.Group(func(r chi.Router) {
 		r.Use(middleware.AuthMiddleware)
@@ -50,10 +51,13 @@ func main() {
 
 		r.Post("/take-balance", routes.PostTakeBalance(db))
 		r.Get("/balance", routes.GetBalance(db))
+		r.Put("/add-balance", routes.PostAddBalance(db))
+		r.Delete("/delete-user/{id}", routes.DeleteUser(db))
+
 	})
 
-	// fmt.Println("Server running on port 3000")
-	// http.ListenAndServe(":3000", r)
+	// fmt.Println("Server running on port 8080")
+	// http.ListenAndServe(":8080", r)
 
 	fmt.Println("Server running on port", port)
 	http.ListenAndServe(":"+port, r)

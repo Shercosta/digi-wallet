@@ -83,6 +83,7 @@ func Register(db *gorm.DB) http.HandlerFunc {
 		user := models.User{
 			Username: body.Username,
 			Password: string(hashedPassword),
+			Level:    1,
 		}
 
 		if err := db.Create(&user).Error; err != nil {

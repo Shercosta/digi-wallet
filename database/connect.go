@@ -36,6 +36,7 @@ func Connect() *gorm.DB {
 		migrations.CreateBalanceTable(),
 		migrations.CreateUserTable(),
 		migrations.AddUserIDToBalance(),
+		migrations.AddLevelToUser(),
 	})
 
 	if err := m.Migrate(); err != nil {
